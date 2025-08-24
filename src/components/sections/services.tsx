@@ -38,7 +38,7 @@ export default function Services() {
 
     const aboutInView = useInView(aboutRef, { once: true, amount: 0.3 });
     return (
-        <section className="" id="services">
+        <section id="services">
             <div className="mx-auto mb-16 max-w-3xl text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}

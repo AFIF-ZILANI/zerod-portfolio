@@ -4,7 +4,7 @@ import React from "react";
 import { Badge } from "../ui/badge";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { FaFacebook, FaGithub, FaGlobe, FaStar } from "react-icons/fa";
 import { FaInstagram, FaXTwitter, FaLinkedinIn } from "react-icons/fa6";
 
@@ -47,11 +47,14 @@ const Founders: React.FC = () => {
             </div>
             <div className="py-16 px-6 flex flex-col md:flex-row items-center justify-between gap-8">
                 {/* <!-- Left Side: Image --> */}
-                <div className="w-full md:w-5/12 flex justify-center h-full md:justify-end">
+                <div className="w-full md:w-5/12 flex justify-center h-full md:justify-end relative">
                     <Image
                         src="/images/tauhid.jpg"
                         alt="About Tauhid Rana"
                         className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
+                        width={400}
+                        height={500}
+                        loading="lazy"
                     />
                 </div>
 
@@ -66,7 +69,7 @@ const Founders: React.FC = () => {
                     </div>
 
                     {/* <!-- Main Heading --> */}
-                    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 pl-10">
+                    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 mt-6 md:mt-0 pl-10">
                         Hello There!, I&apos;m <br />{" "}
                         <span className=" text-[#FF401A]">Tauhid Rana</span>
                     </h2>
@@ -86,24 +89,32 @@ const Founders: React.FC = () => {
                     </div>
 
                     {/* <!-- Buttons --> */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="http://" target="_blank" rel="noopener noreferrer">
+                    <div className="flex gap-4 justify-center md:justify-start">
+                        <a
+                            href="https://github.com/Tauhidrana"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaGithub className="text-4xl bg-white text-black hover:bg-primary p-1 rounded-lg hover:text-white transition-colors duration-300" />
                         </a>
-                        <a href="http://" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.facebook.com/tauhid.rana.00"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaFacebook className="text-4xl bg-white text-black hover:bg-primary p-1 rounded-lg hover:text-white transition-colors duration-300" />
                         </a>
-                        <a href="http://" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.instagram.com/tauhid.rana.52"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaInstagram className="text-4xl bg-white text-black hover:bg-primary p-1 rounded-lg hover:text-white transition-colors duration-300" />
                         </a>
                         <a href="http://" target="_blank" rel="noopener noreferrer">
                             <FaXTwitter className="text-4xl bg-white text-black hover:bg-primary p-1 rounded-lg hover:text-white transition-colors duration-300" />
                         </a>
-                        <a
-                            href="https://www.linkedin.com/in/afifzilani"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a href="" target="_blank" rel="noopener noreferrer">
                             <FaLinkedinIn className="text-4xl bg-white text-black hover:bg-primary p-1 rounded-lg hover:text-white transition-colors duration-300" />
                         </a>
                         <a href="http://" target="_blank" rel="noopener noreferrer">
@@ -115,11 +126,14 @@ const Founders: React.FC = () => {
 
             <div className="py-16 px-6 flex flex-col md:flex-row items-center justify-between gap-8">
                 {/* <!-- Left Side: Image --> */}
-                <div className="w-full md:w-5/12 flex justify-center h-full md:justify-end">
+                <div className="w-full md:w-5/12 flex justify-center h-full md:justify-end relative">
                     <Image
                         src="/images/afif2.jpg"
                         alt="About AFIF ZILANI"
                         className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
+                        width={400}
+                        height={500}
+                        loading="lazy"
                     />
                 </div>
 
@@ -134,7 +148,7 @@ const Founders: React.FC = () => {
                     </div>
 
                     {/* <!-- Main Heading --> */}
-                    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 pl-10">
+                    <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 mt-6 md:mt-0 pl-10">
                         Hi I&apos;m
                         <br /> <span className="text-primary">AFIF ZILANI</span>
                     </h2>
@@ -153,7 +167,7 @@ const Founders: React.FC = () => {
                         <FaStar className="text-xl text-yellow-400 mb-1" />
                         <span>Backend Web Development</span>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <div className="flex gap-4 justify-center md:justify-start">
                         <a
                             href="http://github.com/AFIF-ZILANI"
                             target="_blank"

@@ -41,8 +41,8 @@ export default function ContactUs1() {
     };
 
     return (
-        <section className=" relative w-full overflow-hidden py-16 md:py-24 flex justify-center items-center">
-            <div className="relative p-6 z-10 flex flex-col w-full" ref={formRef}>
+        <section id="contact" className=" relative w-full overflow-hidden py-16 md:py-24 flex justify-center items-center">
+            <div className="relative p-6 z-10 flex flex-col md:w-[60vw] w-[80%]" ref={formRef}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ export default function ContactUs1() {
                         <Button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-gradient-to-b from-rose-500 to-rose-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]"
+                            className="md:w-[40%] bg-gradient-to-b from-rose-500 to-rose-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]"
                         >
                             {isSubmitting ? (
                                 <span className="flex items-center justify-center">

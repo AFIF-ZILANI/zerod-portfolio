@@ -34,9 +34,9 @@ const socialLinks = [
 
 export default function Footer() {
     return (
-        <footer className="text-white py-6 w-full h-screen relative overflow-hidden">
-            <div className={`text-center space-y-3 relative right-[10rem]`}>
-                <h2 className="text-3xl font-bold mb-2 text-[#FF401A]">Connect with Us</h2>
+        <footer className="text-white py-6 w-full md:h-screen relative overflow-hidden">
+            <div className={`text-center space-y-3 relative md:right-[10rem]`}>
+                <h2 className="md:text-3xl text-2xl font-bold mb-2 text-[#FF401A]">Connect with Us</h2>
                 <div className="flex flex-col justify-center items-center gap-4">
                     {socialLinks.map(({ href, Icon, name, iconPos }) => (
                         <ScocialLink
@@ -49,7 +49,7 @@ export default function Footer() {
                     ))}
                 </div>
             </div>
-            <div className="absolute top-28 left-[20rem] w-full flex justify-center z-[-10]">
+            <div className="absolute top-28 left-20 md:left-[20rem] w-full flex justify-center z-[-10]">
                 <Earth
                     scale={1.1}
                     baseColor={[1, 0.251, 0.102]} // #ff401a
@@ -72,8 +72,8 @@ function ScocialLink({ href, Icon, name, iconPos = "left" }: ScocialLinkProps) {
     return (
         <div className="flex justify-center items-center gap-1 group">
             {iconPos === "right" && <FlipLink href={href}>{name}</FlipLink>}
-            <span className="h-[4.5rem] bg-white text-black rounded-lg flex justify-center items-center px-1 group-hover:bg-[#FF401A] transition-colors group-hover:text-white">
-                <Icon className="text-6xl" />
+            <span className="md:h-[4.5rem] h-[1.8rem] bg-white text-black rounded-lg flex justify-center items-center px-1 group-hover:bg-[#FF401A] transition-colors group-hover:text-white">
+                <Icon className="md:text-6xl text-2xl" />
             </span>
             {iconPos === "left" && <FlipLink href={href}>{name}</FlipLink>}
         </div>

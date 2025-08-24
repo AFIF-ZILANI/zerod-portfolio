@@ -170,7 +170,7 @@ export default function AboutUs2() {
                                 className="relative mb-10 md:grid md:grid-cols-5 md:gap-8"
                             >
                                 <div className="md:col-span-1">
-                                    <div className="border-border bg-card absolute -left-12 flex h-8 w-8 items-center justify-center rounded-full border text-sm font-bold md:static md:h-auto md:w-auto md:rounded-none md:border-none md:bg-transparent md:text-xl">
+                                    <div className="text-sm font-bold md:static md:h-auto md:w-auto md:rounded-none md:border-none md:bg-transparent md:text-xl text-white/80">
                                         {item.year}
                                     </div>
                                 </div>
