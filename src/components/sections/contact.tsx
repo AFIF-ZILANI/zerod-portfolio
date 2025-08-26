@@ -8,40 +8,61 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Check, Loader2 } from "lucide-react";
 import GradientBars from "../ui/gradiant-bar";
-export default function ContactUs1() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+import { toast } from "sonner";
 
+interface ContactFormState {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+}
+const initialState: ContactFormState = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+};
+
+export default function ContactUs1() {
     const formRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(formRef, { once: true, amount: 0.3 });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+    const [form, setForm] = useState<ContactFormState>(initialState);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
+    const handleChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ): void => {
+        const { name, value } = event.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        event.preventDefault();
+        setLoading(true);
         try {
-            // Perform form submission logic here
-            console.log("Form submitted:", { name, email, message });
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setName("");
-            setEmail("");
-            setMessage("");
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
+            if (!response.ok) throw new Error("Network response was not ok");
             setIsSubmitted(true);
-            setTimeout(() => {
-                setIsSubmitted(false);
-            }, 5000);
-        } catch (error) {
-            console.error("Error submitting form:", error);
+            toast("Message sent! I will get back to you soon.");
+            setForm(initialState);
+        } catch {
+            toast.error("Something went wrong.");
         } finally {
-            setIsSubmitting(false);
+            setLoading(false);
         }
     };
 
     return (
-        <section id="contact" className=" relative w-full overflow-hidden py-16 md:py-24 flex justify-center items-center">
+        <section
+            id="contact"
+            className=" relative w-full overflow-hidden py-16 md:py-24 flex justify-center items-center"
+        >
             <div className="relative p-6 z-10 flex flex-col md:w-[60vw] w-[80%]" ref={formRef}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -64,40 +85,57 @@ export default function ContactUs1() {
                     onSubmit={handleSubmit}
                     className="mt-8 space-y-6"
                 >
-                    <div className="grid grid-cols-1 gap-6">
-                        <motion.div
-                            className="space-y-2"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                        >
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Enter your name"
-                                required
-                            />
-                        </motion.div>
+                    <motion.div
+                        className="space-y-2"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                            id="name"
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            placeholder="Enter your name"
+                            required
+                        />
+                    </motion.div>
 
-                        <motion.div
-                            className="space-y-2"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
-                                required
-                            />
-                        </motion.div>
-                    </div>
+                    <motion.div
+                        className="space-y-2"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </motion.div>
+
+                    <motion.div
+                        className="space-y-2"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <Label htmlFor="subject">Subject</Label>
+                        <Input
+                            id="subject"
+                            name="subject"
+                            type="text"
+                            value={form.subject}
+                            onChange={handleChange}
+                            placeholder="Enter subject"
+                        />
+                    </motion.div>
 
                     <motion.div
                         className="space-y-2"
@@ -108,8 +146,9 @@ export default function ContactUs1() {
                         <Label htmlFor="message">Message</Label>
                         <Textarea
                             id="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            name="message"
+                            value={form.message}
+                            onChange={handleChange}
                             placeholder="Enter your message"
                             required
                             className="h-40 resize-none"
@@ -123,10 +162,10 @@ export default function ContactUs1() {
                     >
                         <Button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={loading}
                             className="md:w-[40%] bg-gradient-to-b from-rose-500 to-rose-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]"
                         >
-                            {isSubmitting ? (
+                            {loading ? (
                                 <span className="flex items-center justify-center">
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Sending...
